@@ -1,0 +1,51 @@
+{% load staticfiles %}
+<html>
+    <head>
+        <title> Google Geocode Api </title>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+            <link rel="stylesheet" href="{% static 'apiapp/style.css' %}" type="text/css">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+    <nav class="navbar navbar-expand-sm bg-success navbar-dark">
+              <!-- Brand/logo -->
+              <a class="navbar-brand" href="#">Geocode API</a>
+        </nav>
+    <div class="container">
+
+
+        <form action="{% url 'index' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="customFile" name="excel_file" required="required">
+                <label class="custom-file-label" for="customFile" >Choose file</label>
+            </div><br>
+         <!---   <input type="file"
+                   title="Upload excel file"
+                   name="excel_file"
+                   style="border: 1px solid black; padding: 5px;"
+                   required="required">
+            <p>-->
+            <div id="button">
+            <button type="submit"
+                  class="btn btn-success"
+                    value="Upload">Upload </button>
+            </div>
+        </form>
+
+        <p></p>
+        <hr>
+
+        {% for row in excel_data %}
+            {% for cell in row %}
+                {{ cell }} &nbsp;&nbsp;
+            {% endfor %}
+            <br>
+        {% endfor %}
+    </div>
+    </body>
+</html>
