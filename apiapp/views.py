@@ -1,18 +1,14 @@
 from django.shortcuts import render
 import requests
 import openpyxl
-# Create your views here.
 def index(request):
     if "GET" == request.method:
          return render(request, 'index.html', {})
     else:
         excel_file = request.FILES["excel_file"]
 
-    # you may put validations here to check extension or file size
-
         wb = openpyxl.load_workbook(excel_file)
 
-    # getting a particular sheet by name out of many sheets
         worksheet = wb["Sheet1"]
         print(worksheet)
 
